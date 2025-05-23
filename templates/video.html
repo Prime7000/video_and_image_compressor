@@ -1,0 +1,87 @@
+<html><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<title>Video Compressor</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+</head>
+<body class="bg-[#111418] text-white font-inter">
+<div class="flex min-h-screen">
+<aside class="w-80 bg-[#181C20] p-6 space-y-6 border-r border-[#3b4754]">
+<h1 class="text-2xl font-bold text-[#0c7ff2]">Compress Video</h1>
+<div>
+<label class="block text-sm font-medium text-gray-300 mb-2" for="input-video-file">Input Video File</label>
+<div class="relative">
+<input class="form-input block w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[#0c7ff2] file:text-white hover:file:bg-[#0a6ac9] bg-[#1b2127] border border-[#3b4754] rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#0c7ff2] focus:border-transparent" id="input-video-file" type="file"/>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-center mb-2">
+<label class="block text-sm font-medium text-gray-300" for="crf-slider">CRF (0-51)</label>
+<span class="text-sm text-gray-400" id="crf-value">23</span>
+</div>
+<input class="w-full h-2 bg-[#3b4754] rounded-lg appearance-none cursor-pointer accent-[#0c7ff2]" id="crf-slider" max="51" min="0" oninput="document.getElementById('crf-value').textContent = this.value" type="range" value="23"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-300 mb-2" for="preset">Preset</label>
+<select class="form-select block w-full pl-3 pr-10 py-2.5 text-base text-gray-300 bg-[#1b2127] border border-[#3b4754] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0c7ff2] focus:border-transparent" id="preset">
+<option>ultrafast</option>
+<option>superfast</option>
+<option>veryfast</option>
+<option>faster</option>
+<option>fast</option>
+<option selected="">medium</option>
+<option>slow</option>
+<option>slower</option>
+<option>veryslow</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-300 mb-2" for="video-bitrate">Video Bitrate (Optional)</label>
+<input class="form-input block w-full pl-3 pr-3 py-2.5 text-base text-gray-300 bg-[#1b2127] border border-[#3b4754] rounded-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#0c7ff2] focus:border-transparent" id="video-bitrate" placeholder="e.g., 2000k" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-300 mb-2" for="audio-bitrate">Audio Bitrate (Optional)</label>
+<input class="form-input block w-full pl-3 pr-3 py-2.5 text-base text-gray-300 bg-[#1b2127] border border-[#3b4754] rounded-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#0c7ff2] focus:border-transparent" id="audio-bitrate" placeholder="e.g., 128k" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-300 mb-2" for="output-format">Output Format</label>
+<select class="form-select block w-full pl-3 pr-10 py-2.5 text-base text-gray-300 bg-[#1b2127] border border-[#3b4754] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0c7ff2] focus:border-transparent" id="output-format">
+<option selected="">MP4</option>
+<option>WEBM</option>
+<option>MKV</option>
+</select>
+</div>
+<button class="w-full bg-[#0c7ff2] hover:bg-[#0a6ac9] text-white font-semibold py-3 px-4 rounded-lg shadow-md transition duration-150 ease-in-out flex items-center justify-center space-x-2" type="button">
+<span class="material-icons">compress</span>
+<span>Compress Video</span>
+</button>
+</aside>
+<main class="flex-1 p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-4">
+<h2 class="text-xl font-semibold text-gray-200">Original Video</h2>
+<div class="relative aspect-video bg-[#1b2127] rounded-lg overflow-hidden shadow-lg border border-[#3b4754] flex items-center justify-center">
+<div class="absolute inset-0 bg-cover bg-center opacity-50" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD2yRyc7OYsRgWXr5Qt9plOmGPqlMkDm7GDq4RgG0mwpbtzC9ChXWsWooDtQ3d875I36S4fQnKcgZNO0iYL7GEAgK3KR3dtAql7GkkcOtzSmZZfaN8dDB8FQ4bUJ1K3i3Z1pZVy9LAVzoY0ajWsQcIicGnN8Wo7h_ISq_cDEE1m7gTXVuTZidYJilZisgdS4vcVOSBQnbR__Ebd8fmdGCJsClUV5yb4ns4hwRme1hTLssijdQC_YNqjwhg1JwFhHdWP2NqDexVPfSEQ");'></div>
+<button class="relative z-10 flex items-center justify-center size-20 bg-[#0c7ff2]/60 hover:bg-[#0c7ff2]/80 text-white rounded-full transition-colors duration-150 ease-in-out">
+<span class="material-icons text-5xl">play_arrow</span>
+</button>
+<div class="absolute bottom-4 left-4 bg-black/50 px-3 py-1 rounded-md text-xs text-gray-200">1920x1080 | 25MB | 00:30</div>
+</div>
+</div>
+<div class="space-y-4">
+<h2 class="text-xl font-semibold text-gray-200">Compressed Video</h2>
+<div class="relative aspect-video bg-[#1b2127] rounded-lg overflow-hidden shadow-lg border border-[#3b4754] flex items-center justify-center">
+<div class="absolute inset-0 bg-cover bg-center opacity-50" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDmJnVNDjcDBHLBNyUHUtoBNA53Pz-MZscqx5Bvgn41QIvym6wpUOKUCacRItjuwml5mqmgnCnC1zu_wQEnBTpF_2PjgBvD1Fj5iG6FGKLkx-SEHrqQHDSpmYw-FGJXeAz819r0YAF1Wqgazn8VmRuvqEklNlmcrIHL3eLPfYDkuC9jcPRXSaQP8SVgqshMU0aizHxK2VYHBt8YulR521u-oi6sMoZowiLDpifvn0tiWnUl-KFoW8SjA-nVDxtYhfYEdzmMYmbSgqMl");'></div>
+<button class="relative z-10 flex items-center justify-center size-20 bg-[#0c7ff2]/60 hover:bg-[#0c7ff2]/80 text-white rounded-full transition-colors duration-150 ease-in-out">
+<span class="material-icons text-5xl">play_arrow</span>
+</button>
+<div class="absolute bottom-4 left-4 bg-black/50 px-3 py-1 rounded-md text-xs text-gray-200">1280x720 | 5MB | 00:30</div>
+<div class="absolute top-4 right-4 bg-green-500/80 px-3 py-1 rounded-full text-xs text-white font-semibold">80% Smaller</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

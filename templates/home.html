@@ -1,0 +1,86 @@
+<html><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B600%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<title>CompressIt - Video and Image Compression</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+      .gradient-bg {
+        background: linear-gradient(180deg, #1A1D22 0%, #121416 100%);
+      }
+      .card-hover:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.1);
+      }
+    </style>
+</head>
+<body class="gradient-bg" style='font-family: Inter, "Noto Sans", sans-serif;'>
+<div class="relative flex size-full min-h-screen flex-col text-[#dce8f3] dark group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#2c3135]/50 px-6 sm:px-10 py-4 shadow-sm">
+<div class="flex items-center gap-3">
+<div class="size-8 text-[#dce8f3]">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_6_535)">
+<path clip-rule="evenodd" d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z" fill="currentColor" fill-rule="evenodd"></path>
+</g>
+<defs>
+<clipPath id="clip0_6_535"><rect fill="white" height="48" width="48"></rect></clipPath>
+</defs>
+</svg>
+</div>
+<h2 class="text-[#dce8f3] text-xl font-bold tracking-tight">CompressIt</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-[#dce8f3]/80 hover:text-[#dce8f3] text-sm font-medium transition-colors" href="/">Home</a>
+<a class="text-[#dce8f3]/80 hover:text-[#dce8f3] text-sm font-medium transition-colors" href="/video">Video Compressor</a>
+<a class="text-[#dce8f3]/80 hover:text-[#dce8f3] text-sm font-medium transition-colors" href="/image">Image Compressor</a>
+</nav>
+<button class="flex min-w-[90px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 bg-[#dce8f3]/10 hover:bg-[#dce8f3]/20 text-[#dce8f3] text-sm font-semibold tracking-wide transition-colors">
+<span class="truncate">Sign In</span>
+</button>
+</header>
+<main class="px-4 sm:px-8 lg:px-16 flex flex-1 flex-col items-center justify-center py-10 sm:py-16">
+<div class="layout-content-container flex flex-col max-w-4xl w-full items-center">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-icons text-[#dce8f3]/70 text-xl">code</span>
+<h1 class="text-[#dce8f3]/70 text-sm font-medium">Created by LunafireX</h1>
+</div>
+<p class="text-[#dce8f3] text-3xl sm:text-4xl font-bold tracking-tighter text-center mb-10 sm:mb-16">
+              Effortless Compression for Your Media
+            </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 w-full max-w-3xl">
+<a class="group card-hover flex flex-col items-center bg-[#1f2328] p-6 sm:p-8 rounded-xl shadow-lg transition-all duration-300 ease-in-out transform hover:shadow-2xl border border-[#2c3135]/60" href="/video">
+<div class="mb-4 text-[#dce8f3]">
+<span class="material-icons text-5xl sm:text-6xl">movie_filter</span>
+</div>
+<h3 class="text-[#dce8f3] text-xl sm:text-2xl font-semibold mb-2 text-center">Video Compressor</h3>
+<p class="text-[#dce8f3]/70 text-sm sm:text-base text-center">Reduce video file sizes quickly while preserving quality.</p>
+<button class="mt-6 flex items-center justify-center rounded-lg h-10 px-5 bg-[#dce8f3]/10 hover:bg-[#dce8f3]/20 text-[#dce8f3] text-sm font-medium transition-colors">
+                  Compress Video
+                  <span class="material-icons text-lg ml-2">arrow_forward</span>
+</button>
+</a>
+<a class="group card-hover flex flex-col items-center bg-[#1f2328] p-6 sm:p-8 rounded-xl shadow-lg transition-all duration-300 ease-in-out transform hover:shadow-2xl border border-[#2c3135]/60" href="/image">
+<div class="mb-4 text-[#dce8f3]">
+<span class="material-icons text-5xl sm:text-6xl">image</span>
+</div>
+<h3 class="text-[#dce8f3] text-xl sm:text-2xl font-semibold mb-2 text-center">Image Compressor</h3>
+<p class="text-[#dce8f3]/70 text-sm sm:text-base text-center">Optimize your images for web and storage with ease.</p>
+<button class="mt-6 flex items-center justify-center rounded-lg h-10 px-5 bg-[#dce8f3]/10 hover:bg-[#dce8f3]/20 text-[#dce8f3] text-sm font-medium transition-colors">
+                  Compress Image
+                  <span class="material-icons text-lg ml-2">arrow_forward</span>
+</button>
+</a>
+</div>
+</div>
+</main>
+<footer class="py-6 text-center border-t border-solid border-t-[#2c3135]/50">
+<p class="text-xs text-[#dce8f3]/60">© 2024 CompressIt by LunafireX. All rights reserved.</p>
+</footer>
+</div>
+</div>
+
+</body></html>

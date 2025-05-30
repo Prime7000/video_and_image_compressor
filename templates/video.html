@@ -10,6 +10,14 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 </head>
+
+<style>
+    #video{
+        height:100%;
+        width:100%;
+    }
+</style>
+
 <body class="bg-[#111418] text-white font-inter">
 <div class="flex min-h-screen">
 <aside class="w-80 bg-[#181C20] p-6 space-y-6 border-r border-[#3b4754]">
@@ -43,11 +51,11 @@
 </div>
 <div>
 <label class="block text-sm font-medium text-gray-300 mb-2" for="video-bitrate">Video Bitrate (Optional)</label>
-<input class="form-input block w-full pl-3 pr-3 py-2.5 text-base text-gray-300 bg-[#1b2127] border border-[#3b4754] rounded-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#0c7ff2] focus:border-transparent" id="video-bitrate" placeholder="e.g., 2000k" type="text"/>
+<input class="form-input block w-full pl-3 pr-3 py-2.5 text-base text-gray-300 bg-[#1b2127] border border-[#3b4754] rounded-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#0c7ff2] focus:border-transparent" id="video-bitrate" placeholder="e.g., 2000k" value="100K" type="text"/>
 </div>
 <div>
 <label class="block text-sm font-medium text-gray-300 mb-2" for="audio-bitrate">Audio Bitrate (Optional)</label>
-<input class="form-input block w-full pl-3 pr-3 py-2.5 text-base text-gray-300 bg-[#1b2127] border border-[#3b4754] rounded-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#0c7ff2] focus:border-transparent" id="audio-bitrate" placeholder="e.g., 128k" type="text"/>
+<input class="form-input block w-full pl-3 pr-3 py-2.5 text-base text-gray-300 bg-[#1b2127] border border-[#3b4754] rounded-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#0c7ff2] focus:border-transparent" id="audio-bitrate" placeholder="e.g., 128k" value="32K" type="text"/>
 </div>
 <div>
 <label class="block text-sm font-medium text-gray-300 mb-2" for="output-format">Output Format</label>
@@ -57,7 +65,7 @@
 <option>MKV</option>
 </select>
 </div>
-<button class="w-full bg-[#0c7ff2] hover:bg-[#0a6ac9] text-white font-semibold py-3 px-4 rounded-lg shadow-md transition duration-150 ease-in-out flex items-center justify-center space-x-2" type="button">
+<button class="w-full bg-[#0c7ff2] hover:bg-[#0a6ac9] text-white font-semibold py-3 px-4 rounded-lg shadow-md transition duration-150 ease-in-out flex items-center justify-center space-x-2" type="button" id="compress-button">
 <span class="material-icons">compress</span>
 <span>Compress Video</span>
 </button>
@@ -66,25 +74,197 @@
 <div class="space-y-4">
 <h2 class="text-xl font-semibold text-gray-200">Original Video</h2>
 <div class="relative aspect-video bg-[#1b2127] rounded-lg overflow-hidden shadow-lg border border-[#3b4754] flex items-center justify-center">
-<div class="absolute inset-0 bg-cover bg-center opacity-50" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD2yRyc7OYsRgWXr5Qt9plOmGPqlMkDm7GDq4RgG0mwpbtzC9ChXWsWooDtQ3d875I36S4fQnKcgZNO0iYL7GEAgK3KR3dtAql7GkkcOtzSmZZfaN8dDB8FQ4bUJ1K3i3Z1pZVy9LAVzoY0ajWsQcIicGnN8Wo7h_ISq_cDEE1m7gTXVuTZidYJilZisgdS4vcVOSBQnbR__Ebd8fmdGCJsClUV5yb4ns4hwRme1hTLssijdQC_YNqjwhg1JwFhHdWP2NqDexVPfSEQ");'></div>
-<button class="relative z-10 flex items-center justify-center size-20 bg-[#0c7ff2]/60 hover:bg-[#0c7ff2]/80 text-white rounded-full transition-colors duration-150 ease-in-out">
+<div class="absolute inset-0 bg-cover bg-center opacity-50" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD2yRyc7OYsRgWXr5Qt9plOmGPqlMkDm7GDq4RgG0mwpbtzC9ChXWsWooDtQ3d875I36S4fQnKcgZNO0iYL7GEAgK3KR3dtAql7GkkcOtzSmZZfaN8dDB8FQ4bUJ1K3i3Z1pZVy9LAVzoY0ajWsQcIicGnN8Wo7h_ISq_cDEE1m7gTXVuTZidYJilZisgdS4vcVOSBQnbR__Ebd8fmdGCJsClUV5yb4ns4hwRme1hTLssijdQC_YNqjwhg1JwFhHdWP2NqDexVPfSEQ");'>
+    <!-- where the video plays from -->
+    <video id="video" class="w-full h-auto rounded-lg" controls></video>
+</div>
+<button id="original_play" class="relative z-10 flex items-center justify-center size-20 bg-[#0c7ff2]/60 hover:bg-[#0c7ff2]/80 text-white rounded-full transition-colors duration-150 ease-in-out">
 <span class="material-icons text-5xl">play_arrow</span>
 </button>
-<div class="absolute bottom-4 left-4 bg-black/50 px-3 py-1 rounded-md text-xs text-gray-200">1920x1080 | 25MB | 00:30</div>
+<div class="absolute bottom-4 left-4 bg-black/50 px-3 py-1 rounded-md text-xs text-gray-200"><span id="p_dimension"></span> | <span id="p_size"></span></div>
 </div>
 </div>
 <div class="space-y-4">
 <h2 class="text-xl font-semibold text-gray-200">Compressed Video</h2>
 <div class="relative aspect-video bg-[#1b2127] rounded-lg overflow-hidden shadow-lg border border-[#3b4754] flex items-center justify-center">
-<div class="absolute inset-0 bg-cover bg-center opacity-50" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDmJnVNDjcDBHLBNyUHUtoBNA53Pz-MZscqx5Bvgn41QIvym6wpUOKUCacRItjuwml5mqmgnCnC1zu_wQEnBTpF_2PjgBvD1Fj5iG6FGKLkx-SEHrqQHDSpmYw-FGJXeAz819r0YAF1Wqgazn8VmRuvqEklNlmcrIHL3eLPfYDkuC9jcPRXSaQP8SVgqshMU0aizHxK2VYHBt8YulR521u-oi6sMoZowiLDpifvn0tiWnUl-KFoW8SjA-nVDxtYhfYEdzmMYmbSgqMl");'></div>
-<button class="relative z-10 flex items-center justify-center size-20 bg-[#0c7ff2]/60 hover:bg-[#0c7ff2]/80 text-white rounded-full transition-colors duration-150 ease-in-out">
+<div class="absolute inset-0 bg-cover bg-center opacity-50" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDmJnVNDjcDBHLBNyUHUtoBNA53Pz-MZscqx5Bvgn41QIvym6wpUOKUCacRItjuwml5mqmgnCnC1zu_wQEnBTpF_2PjgBvD1Fj5iG6FGKLkx-SEHrqQHDSpmYw-FGJXeAz819r0YAF1Wqgazn8VmRuvqEklNlmcrIHL3eLPfYDkuC9jcPRXSaQP8SVgqshMU0aizHxK2VYHBt8YulR521u-oi6sMoZowiLDpifvn0tiWnUl-KFoW8SjA-nVDxtYhfYEdzmMYmbSgqMl");'>
+    <video style="display: none;" id="compressed_video" class="w-full h-auto rounded-lg" controls></video>
+</div>
+<button id="compress_button_play" class="relative z-10 flex items-center justify-center size-20 bg-[#0c7ff2]/60 hover:bg-[#0c7ff2]/80 text-white rounded-full transition-colors duration-150 ease-in-out">
 <span class="material-icons text-5xl">play_arrow</span>
 </button>
-<div class="absolute bottom-4 left-4 bg-black/50 px-3 py-1 rounded-md text-xs text-gray-200">1280x720 | 5MB | 00:30</div>
-<div class="absolute top-4 right-4 bg-green-500/80 px-3 py-1 rounded-full text-xs text-white font-semibold">80% Smaller</div>
+<div class="absolute bottom-4 left-4 bg-black/50 px-3 py-1 rounded-md text-xs text-gray-200"><span id="c_size"></span> | <span id="c_dimemsion"></span>     </div>
+<div id="reduced_label" style="display: none;" class="absolute top-4 right-4 bg-green-500/80 px-3 py-1 rounded-full text-xs text-white font-semibold"><span id="ratio"></span>% Smaller</div>
 </div>
 </div>
 </main>
 </div>
+
+<style>
+    .pop{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @keyframes zoomInOut {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+    }
+
+    .zoom-animation {
+    animation: zoomInOut 2s infinite ease-in-out;
+    }
+</style>
+
+<div class="pop zoom-animation  ">
+    <div>
+        <p><img src="{{ url_for('static', filename='img/prime322.png' ) }}" alt="" width="200px"></p>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const video = document.getElementById('input-video-file');
+        const crf = document.getElementById('crf-slider');
+        const preset = document.getElementById('preset')
+        const video_bitrate = document.getElementById('video-bitrate')
+        const audio_bitrate = document.getElementById('audio-bitrate')
+        const video_output =  document.getElementById('output-format')
+        const compress = document.getElementById('compress-button')
+
+        // Listen to CRF slider changes
+        compress.addEventListener('click', () => {
+            console.log('value-------', crf.value);
+
+            // Access the selected video file
+            const file = video.files[0];  // ✅ This is the correct way
+            console.log('video-------', file);
+
+            // getting preset
+            console.log('preset-------', preset.value)
+
+            // bitrate of video and audio and also output video format
+            console.log(`video bitrate ${video_bitrate.value}, audio bitrate ${audio_bitrate.value} and video output ${video_output.value}`)
+
+
+            // triggering the popup page:
+            popup = document.querySelector('.pop')
+            popup.style.display = 'flex'
+
+            // Create a FormData object to hold all the form inputs
+            const formData = new FormData();
+            formData.append('video', file);
+            formData.append('crf', crf.value);
+            formData.append('preset', preset.value);
+            formData.append('video_bitrate', video_bitrate.value);
+            formData.append('audio_bitrate', audio_bitrate.value);
+            formData.append('output_format', video_output.value);
+
+
+            $.ajax({
+                url: '/video',
+                type: 'POST',
+                data: formData,
+                contentType: false,   // ✅ Let the browser set it (with correct boundary)
+                processData: false,   // ✅ Don’t convert FormData into query string
+                success: function (response) {
+                    popup.style.display = 'none'
+                    console.log('Upload successful:', response.status);
+                    console.log('filename', response.filename)
+
+                    // compress preview screen
+                    document.getElementById('compressed_video').style.display = 'block';
+                    document.getElementById('reduced_label').style.display = 'block';
+
+                    document.getElementById('compressed_video').src = `/video/${response.filename}`;
+                    document.getElementById('compressed_video').load();
+
+                    document.getElementById('compress_button_play').style.display = 'none';
+                    document.getElementById('c_dimemsion').innerText = response.dimemsion;
+                    document.getElementById('c_size').innerText = response.size;
+                    document.getElementById('ratio').innerText = response.reduced_ratio;
+
+
+                    console.log(response.size,response.dimemsion,'------------&&&&')
+
+                },
+                error: function (xhr, status, error) {
+                    console.error('Upload failed:', error);
+                }
+            });
+
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+            const v_container = document.getElementById('video')
+            const videoupload = document.getElementById('input-video-file');
+            
+            videoupload.addEventListener('change', function() {
+                const play_buttton = document.getElementById('original_play')
+                const p_size = document.getElementById('p_size')
+                play_buttton.style.display = "none";
+                const the_video = this.files[0];
+                if (the_video){
+                    size_mb = (the_video.size / (1024 * 1024)).toFixed(2);
+                    p_size.innerText = `${size_mb}MB`;
+                    const url = URL.createObjectURL(the_video);
+                    v_container.src = url;
+                    v_container.load();
+
+                    v_container.onloadedmetadata = function() {
+                    // Revoke the object URL once it's no longer needed to free up resources,
+                    // but only after metadata (and potentially the video) has loaded.
+                    // If you need to play the video, you might revoke it later (e.g., on 'ended' or when a new video is loaded).
+                    // For now, we'll keep it until a new video is selected or page unloads.
+                    // URL.revokeObjectURL(objectUrl); // Be careful with when you revoke this if video is still in use.
+
+                    const videoWidth = v_container.videoWidth;
+                    const videoHeight = v_container.videoHeight;
+                    console.log(`Video dimensions: ${videoWidth}x${videoHeight}`);
+                    document.getElementById('p_dimension').innerText = `${videoWidth}x${videoHeight}`
+
+                    
+                };
+                    console.log('code is working')
+                } 
+            })
+    });
+
+
+    
+
+</script>
+
+<!-- <script>
+    let filename = '3129957-hd_1280_720_25fps_compressed.mp4';
+    const c_video = document.getElementById('compressed_video')
+    //getting compressed version
+    $.ajax({
+        type:'GET',
+        url: `/video/${filename}`,
+        success: function(response){
+            if (response){
+                console.log(`-------------${response}`);
+                c_video.src =`/video/${filename}` ;
+                c_video.load();
+            }
+        }
+
+    })
+
+</script> -->
+
 
 </body></html>
